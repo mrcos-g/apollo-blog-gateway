@@ -5,6 +5,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.ts",
     "start:dev": "webpack --config webpack.dev.ts --watch & nodemon build/bundle.js",
+    "lint": "eslint \"src/**/*.ts\"",
     "debug": "nodemon --inspect build/bundle.js"
   },
   "devDependencies": {
