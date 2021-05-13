@@ -1,27 +1,12 @@
-import { ApolloServer, gql } from 'apollo-server-express';
-import express from 'express';
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('dotenv').config();
+}
 
-const app = express();
-const port = process.env.PORT || 4000;
+import server from './config/apollo';
+import app from './config/app';
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello() {
-      return 'world';
-    },
-  },
-};
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+const port = (process.env.PORT || 4000) as number;
 
 server.applyMiddleware({ app });
 
