@@ -11,7 +11,7 @@ const commonConfig: webpack.Configuration = {
       {
         exclude: /node_modules/,
         test: /\.ts$/,
-        use: ['ts-loader'],
+        use: ['ts-loader', 'eslint-loader'],
       },
     ],
   },
