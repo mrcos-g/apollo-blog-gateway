@@ -3,13 +3,8 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
 }
 
-import server from './config/apollo';
-import app from './config/app';
+import 'reflect-metadata';
 
-const port = (process.env.PORT || 4000) as number;
+import startServer from './config/apollo';
 
-server.applyMiddleware({ app });
-
-app.listen({ port }, () => {
-  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
-});
+startServer();
