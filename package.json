@@ -9,9 +9,7 @@
     "debug": "nodemon --inspect build/bundle.js"
   },
   "dependencies": {
-    "@apollo/federation": "^0.25.1",
     "@apollo/gateway": "^0.28.2",
-    "apollo-server": "^2.25.0",
     "apollo-server-express": "^2.24.0",
     "class-validator": "^0.13.1",
     "express": "^4.17.1",
