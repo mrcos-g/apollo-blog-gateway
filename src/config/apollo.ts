@@ -1,21 +1,13 @@
 import { ApolloServer } from 'apollo-server-express';
-import { buildSchema, Resolver, Query } from 'type-graphql';
+import { ApolloGateway } from '@apollo/gateway';
 import app from './app';
 
-@Resolver()
-class HelloResolver {
-  @Query(() => String)
-  public async hello() {
-    return 'hello world';
-  }
-}
-
 const startServer = async (): Promise<void> => {
-  const schema = await buildSchema({
-    resolvers: [HelloResolver],
-  });
+  const serviceList = [{ name: 'accounts', url: `http://localhost:4001` }];
 
-  const server = new ApolloServer({ schema });
+  const gateway = new ApolloGateway({ serviceList });
+
+  const server = new ApolloServer({ gateway, subscriptions: false });
 
   const port = (process.env.PORT || 4000) as number;
 
