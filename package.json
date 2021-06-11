@@ -6,7 +6,11 @@
     "build": "webpack --config webpack.prod.ts",
     "start:dev": "webpack --config webpack.dev.ts --watch & nodemon build/bundle.js",
     "lint": "eslint \"src/**/*.ts\"",
-    "debug": "nodemon --inspect build/bundle.js"
+    "debug": "nodemon --inspect build/bundle.js",
+    "dev": "concurrently -k yarn:dev:*",
+    "dev:accounts": "cd ../apollo-blog-accounts-service && yarn start:dev",
+    "dev:gateway": "wait-on tcp:4001 && yarn start:dev"
+
   },
   "dependencies": {
     "@apollo/gateway": "^0.28.2",
