@@ -7,7 +7,14 @@ const startServer = async (): Promise<void> => {
 
   const gateway = new ApolloGateway({ serviceList });
 
-  const server = new ApolloServer({ gateway, subscriptions: false });
+  const server = new ApolloServer({
+    gateway,
+    subscriptions: false,
+    context: ({ req }) => {
+      const user = req.user || null;
+      return { user };
+    },
+  });
 
   const port = (process.env.PORT || 4000) as number;
 
