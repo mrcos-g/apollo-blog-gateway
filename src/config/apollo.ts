@@ -15,8 +15,8 @@ const startServer = async (): Promise<void> => {
       return new RemoteGraphQLDataSource<IContext>({
         url,
         willSendRequest({ request, context }) {
-          if (request && request.http) {
-            request.http.headers.set('user', context.user ? (JSON.stringify(context.user) as string) : '');
+          if (request && request.http && context.user) {
+            request.http.headers.set('user', context.user ? JSON.stringify(context.user) : '');
           }
         },
       });
@@ -27,7 +27,7 @@ const startServer = async (): Promise<void> => {
     gateway,
     subscriptions: false,
     context: ({ req }) => {
-      const user = req.user || null;
+      const user = req.user || '';
       return { user };
     },
   });
